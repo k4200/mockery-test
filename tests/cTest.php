@@ -20,7 +20,6 @@ class CTest extends PHPUnit_Framework_TestCase
 
         $mock_c2->shouldReceive('foo')->once(); // ->passthru(); が必要
         $mock_c2->shouldReceive('bar')->once();
-        $mock_c2->shouldReceive('insideBar')->never();
 
         $this->assertEquals('mock bar', $mock_usec->complexFunction());
     }
@@ -35,6 +34,7 @@ class CTest extends PHPUnit_Framework_TestCase
 
         $mock_c2->shouldReceive('foo')->once()->passthru();
         $mock_c2->shouldReceive('bar')->once();
+        // 1度呼ばれることになってるけど、呼ばれなくてもテストに通る。
         $mock_c2->shouldReceive('noSuchMethod')->once();
 
         $this->assertEquals('mock bar', $mock_usec->complexFunction());
